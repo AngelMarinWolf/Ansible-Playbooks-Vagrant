@@ -1,0 +1,12 @@
+---
+- name: Starting Nginx Role
+  debug:
+    msg: "Installing, Starting and Enabling Nginx"
+
+- name: Including OS spesific tasks (Debian)
+  include_tasks: "{{ ansible_os_family }}.yml"
+  when: ansible_os_family == 'Debian'
+
+- name: Including OS spesific tasks (RedHat)
+  include_tasks: "{{ ansible_os_family }}.yml"
+  when: ansible_os_family == 'RedHat'

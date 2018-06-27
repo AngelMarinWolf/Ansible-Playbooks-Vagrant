@@ -1,0 +1,28 @@
+---
+- name: Starting HTML Role
+  debug:
+    msg: "Deploying Files"
+
+- name: Copiying fixed files.
+  copy:
+    src: index-fix.html
+    dest: /var/www/html/
+    mode: 0644
+
+- name: Deploying Templates
+  template:
+    src: index.html
+    dest: /var/www/html/
+    mode: 0644
+
+- name: Restarting Apache Service (Debian)
+  debug:
+    msg: "Restarting Apache (Debian)"
+  notify: Restart httpd (Debian)
+  when: ansible_os_family == 'Debian'
+
+- name: Restarting Apache Service (RedHat)
+  debug:
+    msg: "Restarting Apache (RedHat)"
+  notify: Restart httpd (RedHat)
+  when: ansible_os_family == 'RedHat'

@@ -1,0 +1,25 @@
+---
+- hosts: loadbalancer
+  become: yes
+  become_method: sudo
+  roles:
+    - common
+    - nginx
+    - admin-user
+
+- hosts: webservers
+  become: yes
+  become_method: sudo
+  roles:
+    - common
+    - apache
+    - html
+    - admin-user
+
+- hosts: database
+  become: yes
+  become_method: sudo
+  roles:
+    - common
+    - mysql
+    - admin-user

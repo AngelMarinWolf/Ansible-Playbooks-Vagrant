@@ -1,0 +1,7 @@
+---
+- name: Installing GIT(CentOS)
+  yum:
+    name: git
+    state: latest
+    update_cache: yes
+    validate_certs: yes

@@ -1,0 +1,7 @@
+---
+- name: Installing httpd (RedHat)
+  yum:
+    name: httpd
+    state: present
+    validate_certs: yes
+  notify: Restart httpd (RedHat)

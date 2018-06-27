@@ -1,0 +1,24 @@
+---
+- name: Starting Admin-User Role
+  debug:
+    msg: "Creating Admin User with Sudoer grants."
+
+- name: Creating DevOps Group
+  group:
+    name: "{{ group_name }}"
+    state: present
+
+- name: Creating User
+  user:
+    name: "{{ user_name }}"
+    group: "{{ group_name }}"
+    comment: "{{ full_name }}"
+    state: present
+    shell: "{{ shell_type }}"
+
+- name: changing sudoers file
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^# %wheel        ALL=(ALL)       NOPASSWD: ALL'
+    line: "%{{ group_name }}        {{ ansible_hostname }}=(ALL)       NOPASSWD: ALL"
