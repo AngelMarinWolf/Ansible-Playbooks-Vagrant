@@ -22,3 +22,9 @@
     state: present
     regexp: '^# %wheel        ALL=(ALL)       NOPASSWD: ALL'
     line: "%{{ group_name }}        {{ ansible_hostname }}=(ALL)       NOPASSWD: ALL"
+
+- name: Adding SSH Key
+  authorized_key:
+    user: "{{ user_name }}"
+    state: present
+    key: "../files/glopez.pub"
